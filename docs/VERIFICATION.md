@@ -1,10 +1,17 @@
 # Verification record
 
-Review date: 1 November 2026 (Asia/Kolkata).
+Review date: 10 November 2026 (Asia/Kolkata). This record describes the latest reviewed local source update; it does not represent live Gemini verification or a deployment test.
 
-- Passed: `python -m pytest tests -q`: 1 integration smoke test (4.24 seconds), with no provider calls. It extracts the actual distributed ZIP into a temporary directory and checks health, demo creation, premature approval rejection, analysis/evidence coverage, approval, PRD content, zero provider calls, version history, Markdown/DOCX exports, and an unknown workspace.
-- Environment: Windows, Python 3.11.9, pytest 8.3.5, FastAPI 0.162.0, LangGraph 1.2.19, langgraph-checkpoint-sqlite 3.1.3, python-docx 1.2.0, httpx 0.28.1. These were installed for verification from application requirement ranges, not from the archive lockfile.
-- Initial sandbox execution stalled creating Python's internal socket pair; the same test passed outside that sandbox. No application correction was needed.
-- Not verified: browser interaction, optional Gemini, launcher lockfile installation, cloud deployment, or PostgreSQL. No quality benchmark is claimed.
+## Executed checks
 
-To repeat: extract the application as instructed in the root README, install its requirements in an isolated environment, then run `python -m pytest tests -q` from the repository root using that environment. The test itself extracts the source and uses temporary runtime storage. Do not set PRODUCTSENSE_CLOUD=true for the local smoke test.
+- pytest tests/test_ledger_preview.py tests/test_traceability.py tests/test_static_sync.py -q: 13 passed. Covers selected-opportunity ledger retrieval before approval, no scope mutation, invalid choice, visitor ownership, traceability and generated static synchronization.
+- pytest tests/test_research_view_and_csv.py tests/test_visitor_security.py tests/test_paper_consistency.py -q: 34 passed, 1 skipped. The skip is manuscript PDF compilation because pdflatex was unavailable.
+- Frontend Node suites: safety 12 assertions passed; recovery 3 assertions passed; traceability suite passed.
+- Historical integrity verifier completed successfully: 717 study-v2 checksums matched. Manuscript number audit: 65 matches, 0 mismatches, 9 informational notes.
+- Browser inspection used the saved offline demo: feedback analysis, opportunities, pre-approval evidence ledger, explicit approval, offline PRD/review, traceability and local research view. This was not a Gemini call; saved output was labelled as an example.
+
+## Limits
+
+No new Gemini calls, study reruns, paper compilation, independent human scoring, or ProductSense cloud/deployment tests were performed. Structural checks do not establish semantic citation support or PRD quality. The optional research view depends on prepared local data that is deliberately excluded from the public app archive.
+
+The checks above were run in the complete local extraction of ProductSense_Codex_Ready.zip. They are not all rerunnable from the privacy-filtered GitHub application archive because prepared research data and some full-project fixtures are intentionally excluded. This record is verification evidence, not a complete research reproduction bundle.
